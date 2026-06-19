@@ -35,6 +35,13 @@
     </nav>
 </header>
 
+<div class="ribbon">
+    <div class="ribbon-inner">
+        <span class="ribbon-date"><?= date('l d F Y') ?></span>
+        <span class="ribbon-count"><?= count($articles) ?> article<?= count($articles) > 1 ? 's' : '' ?></span>
+    </div>
+</div>
+
 <main>
     <h2 class="section-title"><?= $titreSection ?></h2>
 
@@ -43,8 +50,9 @@
             <p class="no-articles">Aucun article dans cette catégorie pour le moment.</p>
         <?php else: ?>
             <?php foreach ($articles as $article): ?>
-            <article class="card">
-                <div class="card-badge <?= strtolower(htmlspecialchars($article['categorie_libelle'])) ?>">
+            <?php $cat = strtolower(htmlspecialchars($article['categorie_libelle'])); ?>
+            <article class="card cat-<?= $cat ?>">
+                <div class="card-badge <?= $cat ?>">
                     <?= htmlspecialchars($article['categorie_libelle']) ?>
                 </div>
                 <h3 class="card-titre"><?= htmlspecialchars($article['titre']) ?></h3>
@@ -52,7 +60,9 @@
                     <?= htmlspecialchars(mb_substr($article['contenu'], 0, 220)) ?>...
                 </p>
                 <div class="card-footer">
-                    <span class="card-date"><?= date('d/m/Y', strtotime($article['dateCreation'])) ?></span>
+                    <span class="card-meta">
+                        <?= date('d/m/Y', strtotime($article['dateCreation'])) ?>
+                    </span>
                     <a href="index.php?id=<?= $article['id'] ?>" class="card-lire">Lire la suite →</a>
                 </div>
             </article>
