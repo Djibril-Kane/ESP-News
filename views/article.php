@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($article['titre']) ?></title>
+    <title><?= htmlspecialchars($article['titre']) ?> </title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -31,31 +31,20 @@
     </nav>
 </header>
 
-<div class="ribbon">
-    <div class="ribbon-inner">
-        <span class="ribbon-date"><?= date('l d F Y') ?></span>
-    </div>
-</div>
-
 <main>
-    <?php $cat = strtolower(htmlspecialchars($article['categorie_libelle'])); ?>
-    <div class="article-detail cat-<?= $cat ?>">
+    <div class="article-detail">
         <a href="index.php?categorie=<?= $article['categorie_id'] ?>" class="retour">
             ← Retour à <?= htmlspecialchars($article['categorie_libelle']) ?>
         </a>
 
-        <div class="article-hero">
-            <div class="article-badge <?= $cat ?>">
-                <?= htmlspecialchars($article['categorie_libelle']) ?>
-            </div>
+        <div class="article-badge <?= strtolower(htmlspecialchars($article['categorie_libelle'])) ?>">
+            <?= htmlspecialchars($article['categorie_libelle']) ?>
+        </div>
 
-            <h2 class="article-titre"><?= htmlspecialchars($article['titre']) ?></h2>
+        <h2 class="article-titre"><?= htmlspecialchars($article['titre']) ?></h2>
 
-            <div class="article-meta">
-                Publié le <?= date('d/m/Y', strtotime($article['dateCreation'])) ?>
-                <span class="article-meta-sep">·</span>
-                <?= date('H:i', strtotime($article['dateCreation'])) ?>
-            </div>
+        <div class="article-meta">
+            Publié le <?= date('d/m/Y à H:i', strtotime($article['dateCreation'])) ?>
         </div>
 
         <div class="article-contenu">
